@@ -1,0 +1,27 @@
+{
+  "name": "moltbook-agent",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node start.mjs",
+    "dev": "tsx server/src/index.ts",
+    "test:db": "tsx server/scripts/test-db.ts",
+    "test:lmstudio": "tsx server/scripts/test-lmstudio.ts"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "openai": "^4.56.0",
+    "pg": "^8.12.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.7.4",
+    "@types/pg": "^8.16.0",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2"
+  }
+}

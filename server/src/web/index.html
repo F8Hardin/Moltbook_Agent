@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moltbook Agent Dashboard</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 24px; background: #f6f8fb; color: #223; }
+      .panel { max-width: 900px; background: white; border-radius: 8px; padding: 16px; box-shadow: 0 3px 10px rgba(0,0,0,.08); }
+      .chat { border-bottom: 1px solid #eee; padding: 10px 0; }
+      .meta { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+      .badge { font-size: 12px; background: #eef3ff; padding: 2px 8px; border-radius: 999px; }
+      button { margin-top: 12px; padding: 8px 12px; }
+    </style>
+  </head>
+  <body>
+    <div class="panel">
+      <h2>Recent Chats</h2>
+      <div id="chats"></div>
+      <button id="loadMore">Load more</button>
+    </div>
+    <script>
+      const chatsEl = document.getElementById('chats');
+      const loadMoreBtn = document.getElementById('loadMore');
+      let limit = 10;
+      const fetchChats = async () => {
+        const response = await fetch(`/api/chats?limit=${limit}`);
+        const data = await response.json();
+        const chats = [...data.chats].reverse();
+        chatsEl.innerHTML = chats.map((c) => `
+          <div class="chat">
+            <div><strong>${c.role}</strong> · ${new Date(c.createdAt).toLocaleString()}</div>
+            <div>${c.content}</div>
+            <div class="meta">
+              <span class="badge">intent: ${c.meta.intention ?? 'n/a'}</span>
+              <span class="badge">action: ${c.meta.actionType ?? 'n/a'}</span>
+              <span class="badge">status: ${c.meta.status ?? 'n/a'}</span>
+            </div>
+          </div>
+        `).join('');
+      };
+      loadMoreBtn.addEventListener('click', () => { limit += 10; void fetchChats(); });
+      void fetchChats();
+    </script>
+  </body>
+</html>
