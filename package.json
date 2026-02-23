@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "start": "node start.mjs",
+    "start": "./start.sh",
     "dev": "tsx server/src/index.ts",
     "test:db": "tsx server/scripts/test-db.ts",
     "test:lmstudio": "tsx server/scripts/test-lmstudio.ts"
