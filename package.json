@@ -8,7 +8,8 @@
     "start": "./start.sh",
     "dev": "tsx server/src/index.ts",
     "test:db": "tsx server/scripts/test-db.ts",
-    "test:lmstudio": "tsx server/scripts/test-lmstudio.ts"
+    "test:lmstudio": "tsx server/scripts/test-lmstudio.ts",
+    "start:win": "start.bat"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
